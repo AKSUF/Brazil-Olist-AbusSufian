@@ -33,15 +33,3 @@ call AutoDetectColumnCategory('fact_orders');
 select * from dim_seller_geo;
 show tables;
 
-
-ALTER TABLE dim_customer
-DROP COLUMN geolocation_lat,
-DROP COLUMN geolocation_lng,
-DROP COLUMN geolocation_city,
-DROP COLUMN geolocation_state;
-
-ALTER TABLE dim_seller
-DROP COLUMN geolocation_lat,
-DROP COLUMN geolocation_lng,
-DROP COLUMN geolocation_city,
-DROP COLUMN geolocation_state;

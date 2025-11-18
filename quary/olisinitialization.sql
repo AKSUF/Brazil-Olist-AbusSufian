@@ -1,5 +1,6 @@
 create database olist;
 use olist;
+show tables;
 -- customer table 
 CREATE TABLE customers (
     customer_id VARCHAR(50),
