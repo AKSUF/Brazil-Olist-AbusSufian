@@ -104,4 +104,4 @@ Ideal for e-com/retail recruiters seeking analysts who:
 Open to feedback — iterating on geo expansion model next.
 
 ⭐ If useful!  
-🔗 LinkedIn: [your-link] | Portfolio: [your-site]
+🔗 LinkedIn: [your-link] | Portfolio: [cooming soon]
