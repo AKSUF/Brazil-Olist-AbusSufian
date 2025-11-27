@@ -102,6 +102,7 @@ Ideal for e-com/retail recruiters seeking analysts who:
 - Bridge ops + business (delivery-review correlation → actionable recs)
 
 Open to feedback — iterating on geo expansion model next.
+To know more please read the project report .It is available in docs and pdf version ,please check it out.
 
 ⭐ If useful!  
 🔗 LinkedIn: linkedin.com/in/abu-sufian-data  | Portfolio: [cooming soon]
