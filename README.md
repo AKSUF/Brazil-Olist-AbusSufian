@@ -77,7 +77,10 @@ Power BI pages with professional scheme (Teal Blue highlights, Warm Beige bg):
 - Product/Seller Leaderboards (ABC class, review vs. delivery scatter)
 - Risk Radar (HHI, concentration %s, $ at-risk)
 
-[ryrye](https://app.powerbi.com/view?r=eyJrIjoiOGY3NWU5MmQtMTE5Ny00ODBkLTk4ZGItYTZlOTQ2MDAyZmI0IiwidCI6ImJhMGRjM2Q5LWVhMmMtNDI0YS1hZTFjLThlMzVkNTExZmExYSIsImMiOjEwfQ%3D%3D&pageName=f6baf8a06a5a8153084c)
+## Project Dashboard
+
+You can view the dashboard here: [the dashboard link](https://app.powerbi.com/view?r=eyJrIjoiOGY3NWU5MmQtMTE5Ny00ODBkLTk4ZGItYTZlOTQ2MDAyZmI0IiwidCI6ImJhMGRjM2Q5LWVhMmMtNDI0YS1hZTFjLThlMzVkNTExZmExYSIsImMiOjEwfQ%3D%3D&pageName=f6baf8a06a5a8153084c)
+
 
 ## 📁 Repository Structure
 ```
