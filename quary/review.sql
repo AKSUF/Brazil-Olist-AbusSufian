@@ -1,3 +1,5 @@
+
+create view review_section as
 SELECT 
     review_score,
     COUNT(*) AS review_count,
@@ -11,7 +13,7 @@ FROM dim_order_review
 GROUP BY review_score
 ORDER BY review_score DESC;
 
-
+create view review_date as
 -- review for time intelligence
 SELECT 
     dd.year,
@@ -99,7 +101,7 @@ ORDER BY avg_review_score DESC, total_reviews DESC;
 
 
 -- review for product category
-
+create view product_review as
 SELECT 
     COALESCE(dp.product_category_name, 'Unknown') AS category,
     COUNT(DISTINCT dor.review_id) AS total_reviews,
@@ -126,6 +128,8 @@ ORDER BY avg_review_score DESC, total_reviews DESC;
 
 
 -- deliver time impacts on review
+
+create view delivery_review as
 WITH delivery_review_data AS (
     SELECT 
         dor.review_score,
@@ -168,7 +172,7 @@ ORDER BY
 
 
 -- cooments 
-
+create view coomment_review as
 SELECT 
     CASE 
         WHEN review_score = 5 THEN '5 Stars'
@@ -192,6 +196,8 @@ ORDER BY review_score DESC;
 
 
 -- customer timing
+
+create view review_tiing as
 WITH review_timing AS (
     SELECT 
         dor.review_score,

@@ -1,5 +1,7 @@
 -- product catalog utilization
 -- Product catalog utilization
+
+create view product_basic as
 SELECT 
     'Total Catalog' AS product_status,
     COUNT(*) AS product_count,
@@ -40,6 +42,7 @@ FROM fact_order_items foi;
 
 
 -- Category performance overview
+create view product_category as
 SELECT 
     COALESCE(dp.product_category_name, 'Unknown') AS category,
     COUNT(DISTINCT dp.product_id) AS unique_products,

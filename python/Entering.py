@@ -1,15 +1,38 @@
 from sqlalchemy import create_engine
 import pandas as pd
 
-# Connect to the MySQL database
-engine = create_engine('mysql+pymysql://root:Ni#hal55@localhost:3306/olist')
+# -----------------------------
+# 1. LOAD CSV
+# -----------------------------
+df = pd.read_csv("G:/DATAPROJECT/panti/Data/brand.csv")
 
-# Load CSV
-df = pd.read_csv("G:/DATAPROJECT/Olist/archive (1)/product_category_name_translation.csv")
+# -----------------------------
+# 2. DEBUG: PRINT ORIGINAL COLUMNS
+# -----------------------------
+print("ORIGINAL COLUMNS:", list(df.columns))
 
-# Clean column names
+# -----------------------------
+# 3. FIX: REMOVE EMPTY / BAD COLUMNS
+# -----------------------------
+
+# Remove None or NaN column names
+df = df.loc[:, df.columns.notnull()]
+
+# Remove columns where column name is "" after strip
+df = df.loc[:, df.columns.astype(str).str.strip() != ""]
+
+# Remove "Unnamed: xx" columns
+df = df.loc[:, ~df.columns.str.contains('^unnamed', case=False, na=False)]
+
+# Remove columns with ALL NaN values
+df = df.dropna(axis=1, how='all')
+
+# -----------------------------
+# 4. CLEAN COLUMN NAMES
+# -----------------------------
 df.columns = (
     df.columns
+    .astype(str)
     .str.strip()
     .str.lower()
     .str.replace(' ', '_')
@@ -17,22 +40,28 @@ df.columns = (
     .str.replace(r'[^0-9a-zA-Z_]', '', regex=True)
 )
 
-# Drop unnamed columns
-df = df.loc[:, ~df.columns.str.contains('^unnamed')]
+# -----------------------------
+# 5. REMOVE ANY COLUMNS THAT BECOME EMPTY AFTER CLEANING
+# -----------------------------
+df = df.loc[:, df.columns.astype(str).str.strip() != ""]
 
-# Fix data types (adjust as needed)
-if 'date' in df.columns:
-    df['date'] = pd.to_datetime(df['date'], errors='coerce').dt.date
-if 'qty' in df.columns:
-    df['qty'] = pd.to_numeric(df['qty'], errors='coerce').fillna(0).astype(int)
-if 'amount' in df.columns:
-    df['amount'] = pd.to_numeric(df['amount'], errors='coerce').fillna(0).astype(float)
-if 'ship_postal_code' in df.columns:
-    df['ship_postal_code'] = df['ship_postal_code'].astype(str)
-if 'b2b' in df.columns:
-    df['b2b'] = df['b2b'].astype(str).str.lower().isin(['true', '1', 'yes'])
+# -----------------------------
+# 6. DEBUG: PRINT FINAL COLUMNS
+# -----------------------------
+print("FINAL COLUMNS:", list(df.columns))
 
-# Upload to MySQL
-df.to_sql('product_category_name_translation', con=engine, if_exists='replace', index=False)
+# STOP if blank columns still exist
+if any(col.strip() == "" for col in df.columns):
+    raise ValueError("❌ ERROR: Still contains blank column names. Check CSV header.")
+
+# -----------------------------
+# 7. CONNECT TO MYSQL
+# -----------------------------
+engine = create_engine('mysql+pymysql://root:Ni#hal55@localhost:3306/panti')
+
+# -----------------------------
+# 8. UPLOAD TO MYSQL
+# -----------------------------
+df.to_sql('brand', con=engine, if_exists='replace', index=False)
 
 print("✅ Data uploaded successfully!")
